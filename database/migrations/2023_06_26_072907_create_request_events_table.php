@@ -19,6 +19,7 @@ class CreateRequestEventsTable extends Migration
             $table->foreignIdFor(Admin::class)->nullable();
             $table->string('name');
             $table->string('event');
+            $table->string('slug');
             $table->date('date_start');
             $table->date('date_done');
             $table->string('location');

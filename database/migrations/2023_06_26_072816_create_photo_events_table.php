@@ -18,6 +18,7 @@ class CreatePhotoEventsTable extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class);
             $table->string('name');
+            $table->string('slug');
             $table->string('photo');
             $table->string('location');
             $table->string('description')->nullable();

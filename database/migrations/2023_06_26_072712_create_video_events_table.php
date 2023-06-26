@@ -18,6 +18,7 @@ class CreateVideoEventsTable extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class);
             $table->string('name');
+            $table->string('slug');
             $table->string('video');
             $table->string('location');
             $table->string('description')->nullable();
