@@ -14,6 +14,48 @@ class DocumentController extends Controller
         return view('admin.document.photo.index');
     }
 
+    public function photo_create()
+    {
+        return view('admin.document.photo.add-photo');
+    }
+
+    public function photo_store(Request $request)
+    {
+        $rules = [
+            'name' => 'required|min:2|max:255',
+            'location' => 'required|min:2|max:255',
+            'photo' => 'image|file|max:2048',
+            'description' => 'required|max:2500',
+        ];
+
+        $validateData = $request->validate($rules);
+
+        if ($request->file('photo')) {
+            $validateData['photo'] = $request->file('photo')->store('photo-event');
+        }
+
+        $validateData['slug'] = slug($request->name);
+        $validateData['admin_id'] = auth()->user()->admin[0]->id;
+
+        $photos = PhotoEvent::create($validateData);
+
+        if ($photos) {
+            return redirect('photo/add')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Adding Success!'
+            ]);
+        } else {
+            return redirect('photo/add')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Adding Failed!'
+            ]);
+        }
+    }
+
     public function dataPhoto()
     {
         return DataTables::of(PhotoEvent::all())
@@ -35,7 +77,7 @@ class DocumentController extends Controller
         ->addColumn('action', function ($model) {
             return view('admin.document.video.form-action', compact('model'))->render();
         })
-        ->rawColumns(['age', 'status', 'action'])
+        ->rawColumns(['action'])
         ->make(true);
     }
 }

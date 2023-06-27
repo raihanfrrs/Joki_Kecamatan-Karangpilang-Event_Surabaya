@@ -42,6 +42,11 @@ Route::middleware('auth')->group(function () {
     Route::group(['middleware' => ['cekUserLogin:admin']], function () {
         Route::controller(DocumentController::class)->group(function () {
             Route::get('photo', 'photo_index');
+            Route::get('photo/add', 'photo_create');
+            Route::post('photo', 'photo_store');
+            Route::get('photo/{photo}/edit', 'photo_edit');
+            Route::put('photo/{photo}', 'photo_update');
+            Route::get('photo/{photo}', 'photo_show');
             Route::get('/dataPhoto', [DocumentController::class, 'dataPhoto'])->name('dataPhoto');
             
             Route::get('video', 'video_index');

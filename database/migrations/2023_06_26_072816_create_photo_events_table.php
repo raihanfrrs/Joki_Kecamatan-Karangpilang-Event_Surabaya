@@ -21,7 +21,7 @@ class CreatePhotoEventsTable extends Migration
             $table->string('slug');
             $table->string('photo');
             $table->string('location');
-            $table->string('description')->nullable();
+            $table->text('description');
             $table->timestamps();
         });
     }

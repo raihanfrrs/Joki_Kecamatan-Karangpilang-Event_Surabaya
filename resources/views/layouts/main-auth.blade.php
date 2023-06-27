@@ -42,6 +42,8 @@
 
         @include('partials.auth.sidebar')
 
+        @include('partials.flasher')
+
         <main id="main" class="main">
             @include('partials.auth.breadcrumb-title')
             

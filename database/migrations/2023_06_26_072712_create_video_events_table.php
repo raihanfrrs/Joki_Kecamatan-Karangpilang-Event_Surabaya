@@ -21,7 +21,7 @@ class CreateVideoEventsTable extends Migration
             $table->string('slug');
             $table->string('video');
             $table->string('location');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
