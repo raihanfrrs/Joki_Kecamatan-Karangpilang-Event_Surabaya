@@ -16,40 +16,40 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'username' => 'required|max:255|alpha_num',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
-        $credential = $request->only('username', 'password');
+        $kredensial = $request->only('username', 'password');
 
-        $checkUser = User::where('username', $request->username)->get();
+        $checkUser = User::where('username', $request->username)->first();
 
-        if (count($checkUser) > 0 && $checkUser[0]->status === 'non-active') {
+        if (empty($checkUser)) {
             return back()->withErrors([
-                'username' => 'Your account is being deactivated by the admin, please contact the admin!',
+                'username' => 'Wrong username or password!'
             ])->onlyInput('username');
         }
 
-        if(Auth::attempt($credential)){
+        if(Auth::attempt($kredensial)){
             $request->session()->regenerate();
+
             $user = Auth::user();
 
             if($user){
-                return redirect()->intended('dashboard')->with([
+                return redirect()->intended('/')->with([
                     'flash-type' => 'sweetalert',
                     'case' => 'default',
                     'position' => 'center',
                     'type' => 'success',
-                    'message' => 'Sign-in Success!'
+                    'message' => 'Login Successfuly!'
                 ]);
             }
 
             return redirect()->intended('/');
         }
-
+        
         return back()->withErrors([
-            'username' => 'Username or Password is Wrong!',
-            'password' => 'Username or Password is Wrong!',
-        ])->onlyInput('username', 'password');
+            'username' => 'Wrong username or password!'
+        ])->onlyInput('username');
     }
 }

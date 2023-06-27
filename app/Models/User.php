@@ -17,4 +17,14 @@ class User extends Authenticatable
         'password',
         'level',
     ];
+
+    public function admin()
+    {
+        return $this->hasMany(Admin::class);
+    }
+
+    public function rukun_warga()
+    {
+        return $this->hasMany(RukunWarga::class);
+    }
 }

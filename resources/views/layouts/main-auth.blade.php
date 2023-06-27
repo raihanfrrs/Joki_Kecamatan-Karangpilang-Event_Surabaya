@@ -9,6 +9,7 @@
 
   <!-- ========== VENDOR CSS ========= -->
   <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-5.2.2-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-icons/bootstrap-icons.css" />
   <link rel="stylesheet" href="{{ asset('/') }}vendor/lineicons/lineicons.css" />
   <link rel="stylesheet" href="{{ asset('/') }}vendor/materialdesignicons/materialdesignicons.min.css" />
   <link rel="stylesheet" href="{{ asset('/') }}vendor/sweetalert2/sweetalert2.min.css"/>
@@ -47,8 +48,6 @@
                 @yield('section-auth')
             </section>
         </main>
-
-        @include('partials.auth.footer')
     @endauth
 
 

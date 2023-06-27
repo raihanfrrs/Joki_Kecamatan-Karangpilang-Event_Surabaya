@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -15,6 +16,10 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
+Route::controller(LayoutController::class)->group(function () {
+    Route::get('/', 'index');
+});
+
 Route::middleware('guest')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::get('login', 'index')->name('login');
@@ -24,5 +29,11 @@ Route::middleware('guest')->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('register', 'index')->name('register');
         Route::post('register', 'store');
+    });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(LayoutController::class)->group(function () {
+        Route::get('/', 'index');
     });
 });
