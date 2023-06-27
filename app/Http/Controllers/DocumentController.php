@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PhotoEvent;
+use App\Models\VideoEvent;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -17,14 +18,24 @@ class DocumentController extends Controller
     {
         return DataTables::of(PhotoEvent::all())
         ->addColumn('action', function ($model) {
-            return view('user.player.form-action', compact('model'))->render();
+            return view('admin.document.photo.form-action', compact('model'))->render();
         })
-        ->rawColumns(['age', 'status', 'action'])
+        ->rawColumns(['action'])
         ->make(true);
     }
 
     public function video_index()
     {
+        return view('admin.document.video.index');
+    }
 
+    public function dataVideo()
+    {
+        return DataTables::of(VideoEvent::all())
+        ->addColumn('action', function ($model) {
+            return view('admin.document.video.form-action', compact('model'))->render();
+        })
+        ->rawColumns(['age', 'status', 'action'])
+        ->make(true);
     }
 }

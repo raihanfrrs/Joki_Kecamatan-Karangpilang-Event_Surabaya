@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/dataPhoto', [DocumentController::class, 'dataPhoto'])->name('dataPhoto');
             
             Route::get('video', 'video_index');
+            Route::get('/dataVideo', [DocumentController::class, 'dataVideo'])->name('dataVideo');
         });
     });
 });
