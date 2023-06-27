@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LayoutController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -33,7 +35,16 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::controller(LayoutController::class)->group(function () {
-        Route::get('/', 'index');
+    Route::controller(LogoutController::class)->group(function () {
+        Route::get('logout', 'index');
+    });
+
+    Route::group(['middleware' => ['cekUserLogin:admin']], function () {
+        Route::controller(DocumentController::class)->group(function () {
+            Route::get('photo', 'photo_index');
+            Route::get('/dataPhoto', [DocumentController::class, 'dataPhoto'])->name('dataPhoto');
+            
+            Route::get('video', 'video_index');
+        });
     });
 });

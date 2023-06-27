@@ -2,8 +2,10 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
-        <span class="d-none d-lg-block">NiceAdmin</span>
+        <img src="{{ asset('/') }}img/logo.png">
+        <span class="d-none d-lg-block">
+          Karangpilang
+        </span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
@@ -155,7 +157,7 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->level == 'admin' ? auth()->user()->admin->name : auth()->user()->rukun_warga->name }}</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ auth()->user()->level == 'admin' ? auth()->user()->admin[0]->name : auth()->user()->rukun_warga[0]->name }}</span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">

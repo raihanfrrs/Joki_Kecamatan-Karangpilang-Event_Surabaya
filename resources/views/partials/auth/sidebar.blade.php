@@ -15,12 +15,12 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
+            <a href="/photo">
               <i class="bi bi-circle"></i><span>Photo</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
+            <a href="/video">
               <i class="bi bi-circle"></i><span>Video</span>
             </a>
           </li>
