@@ -1,0 +1,1 @@
+{{ $model->rukun_warga->name }}

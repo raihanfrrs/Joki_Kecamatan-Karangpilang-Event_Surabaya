@@ -7,16 +7,14 @@
             <div class="card">
               <div class="card-body">
                 <div class="table-wrapper table-responsive mt-3">
-                    <table id="dataEvent" class="table">
+                    <table id="dataMusbangkel" class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Event</th>
-                            <th>Start Date</th>
-                            <th>Completion Date</th>
+                            <th>Rukun Warga</th>
+                            <th>Request Type</th>
+                            <th>Size</th>
+                            <th>Amount</th>
                             <th>Location</th>
-                            <th>Phone</th>
                             <th>Status</th>
                             <th>Action</th>
                         </thead>

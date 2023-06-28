@@ -17,4 +17,9 @@ class Admin extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function request_musbangkel()
+    {
+        return $this->hasMany(RequestMusbangkel::class);
+    }
 }
