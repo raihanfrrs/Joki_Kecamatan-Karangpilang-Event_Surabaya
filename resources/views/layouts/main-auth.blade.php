@@ -69,5 +69,7 @@
     <!-- Template Main JS File -->
     <script src="{{ asset('/') }}js/datatables.min.js"></script>
     <script src="{{ asset('/') }}js/main.js"></script>
+    <script src="{{ asset('/') }}js/pre-image.js"></script>
+    <script src="{{ asset('/') }}js/pre-video.js"></script>
 </body>
 </html>

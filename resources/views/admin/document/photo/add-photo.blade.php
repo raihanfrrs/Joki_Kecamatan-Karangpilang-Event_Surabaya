@@ -20,8 +20,11 @@
                 <div class="row mb-3">
                   <label for="photo" class="col-sm-2 col-form-label">Photo Upload</label>
                   <div class="col-sm-10">
-                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo" required>
+                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo" onchange="previewImage()" required>
                     @error('photo') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    <div class="col-12">
+                        <img src="" class="img-preview img-fluid mt-3 col-sm-5" />
+                    </div>
                   </div>
                 </div>
 
@@ -43,7 +46,7 @@
                 <div class="row mb-3">
                   <div class="col-sm-2"></div>
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
             

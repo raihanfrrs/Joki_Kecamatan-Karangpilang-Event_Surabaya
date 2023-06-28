@@ -47,9 +47,16 @@ Route::middleware('auth')->group(function () {
             Route::get('photo/{photo}/edit', 'photo_edit');
             Route::put('photo/{photo}', 'photo_update');
             Route::get('photo/{photo}', 'photo_show');
+            Route::delete('photo/{photo}', 'photo_delete');
             Route::get('/dataPhoto', [DocumentController::class, 'dataPhoto'])->name('dataPhoto');
             
             Route::get('video', 'video_index');
+            Route::get('video/add', 'video_create');
+            Route::post('video', 'video_store');
+            Route::get('video/{video}/edit', 'video_edit');
+            Route::put('video/{video}', 'video_update');
+            Route::get('video/{video}', 'video_show');
+            Route::delete('video/{video}', 'video_delete');
             Route::get('/dataVideo', [DocumentController::class, 'dataVideo'])->name('dataVideo');
         });
     });

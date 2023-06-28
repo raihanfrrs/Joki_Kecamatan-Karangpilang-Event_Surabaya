@@ -20,7 +20,7 @@
             </a>
           </li>
           <li>
-            <a href="/video" class="{{ request()->is('vudeo', 'video/*') ? 'active' : '' }}">
+            <a href="/video" class="{{ request()->is('video', 'video/*') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Video</span>
             </a>
           </li>

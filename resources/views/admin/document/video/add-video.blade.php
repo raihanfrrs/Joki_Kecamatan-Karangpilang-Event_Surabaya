@@ -18,10 +18,10 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label for="photo" class="col-sm-2 col-form-label">Video Upload</label>
+                  <label for="video" class="col-sm-2 col-form-label">Video Upload</label>
                   <div class="col-sm-10">
-                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo" required>
-                    @error('photo') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    <input class="form-control @error('video') is-invalid @enderror" type="file" id="video" name="video" required>
+                    @error('video') <div class="invalid-feedback">{{ $message }}</div> @enderror
                   </div>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="row mb-3">
                   <div class="col-sm-2"></div>
                   <div class="col-sm-10">
-                    <button type="submit" class="btn btn-primary">Submit Form</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
                 </div>
             

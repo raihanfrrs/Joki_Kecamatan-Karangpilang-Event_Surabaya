@@ -6,27 +6,30 @@
 
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Photo Form</h5>
-            <form action="/photo/{{ $photo->slug }}" method="POST" enctype="multipart/form-data">
+            <h5 class="card-title">Video Form</h5>
+            <form action="/video/{{ $video->slug }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('put')
+                @method('PUT')
                 <div class="row mb-3">
                   <label for="name" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" autocomplete="off" required value="{{ old('name', $photo->name) }}">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" autocomplete="off" required value="{{ old('name', $video->name) }}">
                     @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                   </div>
                 </div>
 
                 <div class="row mb-3">
-                  <label for="photo" class="col-sm-2 col-form-label">Photo Upload</label>
+                  <label for="video" class="col-sm-2 col-form-label">Video Upload</label>
                   <div class="col-sm-10">
-                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo">
-                    @error('photo') <div class="invalid-feedback">{{ $message }}</div> @enderror
-                    @if ($photo->photo)
-                      <img src="{{ asset('storage/'. $photo->photo) }}" class="img-preview img-fluid mt-3 col-sm-5" />
+                    <input class="form-control @error('video') is-invalid @enderror" type="file" id="video" name="video" onchange="previewVideo()" required>
+                    @error('video') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                    @if ($video->video)
+                        <video controls class="video-preview mt-3 w-50">
+                            <source src="{{ asset('storage/'. $video->video) }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     @else
-                      <img src="" class="img-preview img-fluid mt-3 col-sm-5" />
+                        <video class="video-preview" controls></video>
                     @endif
                   </div>
                 </div>
@@ -34,7 +37,7 @@
                 <div class="row mb-3">
                     <label for="location" class="col-sm-2 col-form-label">Location</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" autocomplete="off" required value="{{ old('location', $photo->location) }}">
+                      <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" autocomplete="off" required value="{{ old('location', $video->location) }}">
                       @error('location') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     </div>
                   </div>
@@ -42,7 +45,7 @@
                 <div class="row mb-3">
                   <label for="description" class="col-sm-2 col-form-label">Description</label>
                   <div class="col-sm-10">
-                    <textarea class="form-control @error('description') is-invalid @enderror" style="height: 100px" id="description" name="description">{{ old('description', $photo->location) }}</textarea>
+                    <textarea class="form-control @error('description') is-invalid @enderror" style="height: 100px" id="description" name="description">{{ old('description', $video->description) }}</textarea>
                   </div>
                 </div>
 
