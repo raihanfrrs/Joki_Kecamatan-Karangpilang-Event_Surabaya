@@ -49,7 +49,7 @@ Route::middleware('auth')->group(function () {
             Route::get('rw/{rw}/edit', 'rw_edit');
             Route::put('rw/{rw}', 'rw_update');
             Route::get('rw/{photo}', 'rw_show');
-            Route::delete('rw/{rw}', 'rw_delete');
+            Route::delete('rw/{rw}', 'rw_destroy');
             Route::get('/dataRukunWarga', [MasterController::class, 'dataRukunWarga'])->name('dataRukunWarga');
         });
 
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
             Route::get('photo/{photo}/edit', 'photo_edit');
             Route::put('photo/{photo}', 'photo_update');
             Route::get('photo/{photo}', 'photo_show');
-            Route::delete('photo/{photo}', 'photo_delete');
+            Route::delete('photo/{photo}', 'photo_destroy');
             Route::get('/dataPhoto', [DocumentController::class, 'dataPhoto'])->name('dataPhoto');
             
             Route::get('video', 'video_index');
@@ -69,7 +69,7 @@ Route::middleware('auth')->group(function () {
             Route::get('video/{video}/edit', 'video_edit');
             Route::put('video/{video}', 'video_update');
             Route::get('video/{video}', 'video_show');
-            Route::delete('video/{video}', 'video_delete');
+            Route::delete('video/{video}', 'video_destroy');
             Route::get('/dataVideo', [DocumentController::class, 'dataVideo'])->name('dataVideo');
         });
 

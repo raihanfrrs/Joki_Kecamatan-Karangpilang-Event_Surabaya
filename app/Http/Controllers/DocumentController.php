@@ -104,6 +104,25 @@ class DocumentController extends Controller
         }
     }
 
+    public function photo_destroy(PhotoEvent $photo)
+    {
+        if ($photo->delete()) {
+            return redirect('photo')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Delete Success!'
+            ]);
+        } else {
+            return redirect('photo')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Delete Failed!'
+            ]);
+        }
+    }
+
     public function dataPhoto()
     {
         return DataTables::of(PhotoEvent::all())
@@ -207,6 +226,25 @@ class DocumentController extends Controller
                 'position' => 'center',
                 'type' => 'error',
                 'message' => 'Update Failed!'
+            ]);
+        }
+    }
+
+    public function video_destroy(VideoEvent $video)
+    {
+        if ($video->delete()) {
+            return redirect('video')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Delete Success!'
+            ]);
+        } else {
+            return redirect('video')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Delete Failed!'
             ]);
         }
     }

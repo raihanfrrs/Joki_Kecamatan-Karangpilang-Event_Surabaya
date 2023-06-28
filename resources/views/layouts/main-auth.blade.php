@@ -71,5 +71,6 @@
     <script src="{{ asset('/') }}js/main.js"></script>
     <script src="{{ asset('/') }}js/pre-image.js"></script>
     <script src="{{ asset('/') }}js/pre-video.js"></script>
+    <script src="{{ asset('/') }}js/button-custom.js"></script>
 </body>
 </html>
