@@ -14,7 +14,7 @@
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-people"></i>
+                  <i class="bi bi-journal-text"></i>
                 </div>
                 <div class="ps-3">
                   <h6><span id="countRequest"></span></h6>
@@ -33,7 +33,7 @@
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-camera"></i>
+                  <i class="bi bi-journal-text"></i>
                 </div>
                 <div class="ps-3">
                   <h6><span id="countAccepted"></span></h6>
@@ -53,7 +53,7 @@
 
               <div class="d-flex align-items-center">
                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-calendar-event"></i>
+                  <i class="bi bi-journal-text"></i>
                 </div>
                 <div class="ps-3">
                   <h6><span id="countRejected"></span></h6>

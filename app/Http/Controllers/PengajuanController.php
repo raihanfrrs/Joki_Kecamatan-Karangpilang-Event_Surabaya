@@ -57,17 +57,55 @@ class PengajuanController extends Controller
         return view('admin.pengajuan.musbangkel.index');
     }
 
+    public function musbangkel_edit(RequestMusbangkel $musbangkel)
+    {
+        return view('admin.pengajuan.musbangkel.edit-musbangkel')->with([
+            'request' => $musbangkel
+        ]);
+    }
+
+    public function musbangkel_update(Request $request, RequestMusbangkel $musbangkel)
+    {
+        $validateData = $request->validate([
+            'request_type' => 'required',
+            'size' => 'required|min:2|max:255',
+            'amount' => 'required|min:2|max:255',
+            'location' => 'required'
+        ]);
+
+        if ($musbangkel->update($validateData)) {
+            return redirect('musbangkel')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Success!'
+            ]);
+        } else {
+            return redirect('musbangkel')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Failed!'
+            ]);
+        }
+    }
+
+    public function musbangkel_update_status(Request $request, RequestMusbangkel $musbangkel)
+    {
+        return $musbangkel->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
+    }
+
     public function musbangkel_destroy(RequestMusbangkel $musbangkel)
     {
         if ($musbangkel->delete()) {
-            return redirect('event')->with([
+            return redirect('musbangkel')->with([
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Delete Success!'
             ]);
         } else {
-            return redirect('event')->with([
+            return redirect('musbangkel')->with([
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',

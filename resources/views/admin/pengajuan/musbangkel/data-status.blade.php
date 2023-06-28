@@ -1,7 +1,5 @@
-@if ($model->status == 'proses')
-    <span class="badge rounded-pill bg-warning text-dark">Process</span>
-@elseif ($model->status == 'terima')
-    <span class="badge rounded-pill bg-success">Accept</span>
-@elseif ($model->status == 'tolak')
-    <span class="badge rounded-pill bg-danger">Reject</span>
-@endif
+<select name="status" id="statusMusbangkel" class="default-select form-control wide text-center" data-key="{{ $model->id }}">
+    <option value="terima" {{ $model->status == 'terima' ? 'selected' : '' }}>Terima</option>
+    <option value="proses" {{ $model->status == 'proses' ? 'selected' : '' }}>Proses</option>
+    <option value="tolak" {{ $model->status == 'tolak' ? 'selected' : '' }}>Tolak</option>
+</select>

@@ -21,9 +21,6 @@ class CreateAdminsTable extends Migration
             $table->string('slug');
             $table->string('phone');
             $table->string('email');
-            $table->enum('gender', ['laki-laki', 'perempuan']);
-            $table->string('birthPlace');
-            $table->date('birthDate')->nullable();
             $table->timestamps();
         });
     }

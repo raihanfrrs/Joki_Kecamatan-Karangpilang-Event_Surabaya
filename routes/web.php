@@ -8,6 +8,7 @@ use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PengajuanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RequestController;
 
@@ -26,11 +27,21 @@ Route::controller(LayoutController::class)->group(function () {
     Route::get('/', 'index');
 });
 
+Route::controller(ProfileController::class)->group(function () {
+    Route::get('profile', 'index');
+    Route::put('profile/identity', 'update_identity');
+    Route::put('profile/setting', 'update_setting');
+});
+
 Route::controller(DashboardController::class)->group(function () {
     Route::get('dashboard/countRukunWarga', 'countRukunWarga');
     Route::get('dashboard/countPhoto', 'countPhoto');
     Route::get('dashboard/countEvent', 'countEvent');
     Route::get('dashboard/countMusbangkel', 'countMusbangkel');
+
+    Route::get('dashboard/countRequest', 'countRequest');
+    Route::get('dashboard/countAccepted', 'countAccepted');
+    Route::get('dashboard/countRejected', 'countRejected');
 });
 
 Route::middleware('guest')->group(function () {
@@ -105,7 +116,7 @@ Route::middleware('auth')->group(function () {
             Route::get('musbangkel', 'musbangkel_index');
             Route::get('musbangkel/{musbangkel}/edit', 'musbangkel_edit');
             Route::put('musbangkel/{musbangkel}', 'musbangkel_update');
-            Route::get('musbangkel/{musbangkel}', 'musbangkel_show');
+            Route::get('musbangkel/{musbangkel}/status', 'musbangkel_update_status');
             Route::delete('musbangkel/{musbangkel}', 'musbangkel_destroy');
             Route::get('/dataMusbangkel', [PengajuanController::class, 'dataMusbangkel'])->name('dataMusbangkel');
         });

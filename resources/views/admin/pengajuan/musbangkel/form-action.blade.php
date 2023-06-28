@@ -1,4 +1,4 @@
-<form action="musbangkel/{{ $model->id }}" method="post" id="delete-form-{{ $model->id }}">
+<form action="musbangkel/{{ $model->id }}" method="post" id="delete-form-{{ $model->id }}" class="d-inline">
     @csrf
     @method('delete')
     <a href="musbangkel/{{ $model->id }}/edit" class="text-decoration-none text-warning">
