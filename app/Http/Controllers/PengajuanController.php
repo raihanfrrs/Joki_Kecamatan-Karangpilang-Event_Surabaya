@@ -14,6 +14,25 @@ class PengajuanController extends Controller
         return view('admin.pengajuan.event.index');
     }
 
+    public function event_destroy(RequestEvent $event)
+    {
+        if ($event->delete()) {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Delete Success!'
+            ]);
+        } else {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Delete Failed!'
+            ]);
+        }
+    }
+
     public function dataEvent()
     {
         return DataTables::of(RequestEvent::all())
@@ -36,6 +55,25 @@ class PengajuanController extends Controller
     public function musbangkel_index()
     {
         return view('admin.pengajuan.musbangkel.index');
+    }
+
+    public function musbangkel_destroy(RequestMusbangkel $musbangkel)
+    {
+        if ($musbangkel->delete()) {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Delete Success!'
+            ]);
+        } else {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Delete Failed!'
+            ]);
+        }
     }
 
     public function dataMusbangkel()

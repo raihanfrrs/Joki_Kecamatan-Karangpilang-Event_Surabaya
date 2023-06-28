@@ -78,14 +78,14 @@ Route::middleware('auth')->group(function () {
             Route::get('event/{event}/edit', 'event_edit');
             Route::put('event/{event}', 'event_update');
             Route::get('event/{event}', 'event_show');
-            Route::delete('event/{event}', 'event_delete');
+            Route::delete('event/{event}', 'event_destroy');
             Route::get('/dataEvent', [PengajuanController::class, 'dataEvent'])->name('dataEvent');
 
             Route::get('musbangkel', 'musbangkel_index');
             Route::get('musbangkel/{musbangkel}/edit', 'musbangkel_edit');
             Route::put('musbangkel/{musbangkel}', 'musbangkel_update');
             Route::get('musbangkel/{musbangkel}', 'musbangkel_show');
-            Route::delete('musbangkel/{musbangkel}', 'musbangkel_delete');
+            Route::delete('musbangkel/{musbangkel}', 'musbangkel_destroy');
             Route::get('/dataMusbangkel', [PengajuanController::class, 'dataMusbangkel'])->name('dataMusbangkel');
         });
     });
