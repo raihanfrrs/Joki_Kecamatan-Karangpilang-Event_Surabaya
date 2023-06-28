@@ -10,6 +10,19 @@
       </li>
 
       <li class="nav-item">
+        <a class="nav-link {{ request()->is('rw', 'rw/*') ? '' : 'collapsed'}}" data-bs-target="#masters-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="masters-nav" class="nav-content {{ request()->is('rw', 'rw/*') ? '' : 'collapse'}}" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/rw" class="{{ request()->is('rw', 'rw/*') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Rukun Warga</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
+      <li class="nav-item">
         <a class="nav-link {{ request()->is('photo', 'video', 'photo/*', 'video/*') ? '' : 'collapsed'}}" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Document</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>

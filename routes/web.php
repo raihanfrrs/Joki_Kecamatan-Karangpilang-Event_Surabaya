@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\RegisterController;
 
@@ -41,6 +42,17 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::group(['middleware' => ['cekUserLogin:admin']], function () {
+        Route::controller(MasterController::class)->group(function () {
+            Route::get('rw', 'rw_index');
+            Route::get('rw/add', 'rw_create');
+            Route::post('rw', 'rw_store');
+            Route::get('rw/{rw}/edit', 'rw_edit');
+            Route::put('rw/{rw}', 'rw_update');
+            Route::get('rw/{photo}', 'rw_show');
+            Route::delete('rw/{rw}', 'rw_delete');
+            Route::get('/dataRukunWarga', [MasterController::class, 'dataRukunWarga'])->name('dataRukunWarga');
+        });
+
         Route::controller(DocumentController::class)->group(function () {
             Route::get('photo', 'photo_index');
             Route::get('photo/add', 'photo_create');
