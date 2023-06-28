@@ -107,10 +107,13 @@ class DocumentController extends Controller
     public function dataPhoto()
     {
         return DataTables::of(PhotoEvent::all())
+        ->addColumn('photo', function ($model) {
+            return view('admin.document.photo.data-photo', compact('model'))->render();
+        })
         ->addColumn('action', function ($model) {
             return view('admin.document.photo.form-action', compact('model'))->render();
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['photo', 'action'])
         ->make(true);
     }
 
@@ -211,10 +214,13 @@ class DocumentController extends Controller
     public function dataVideo()
     {
         return DataTables::of(VideoEvent::all())
+        ->addColumn('video', function ($model) {
+            return view('admin.document.video.data-video', compact('model'))->render();
+        })
         ->addColumn('action', function ($model) {
             return view('admin.document.video.form-action', compact('model'))->render();
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['video', 'action'])
         ->make(true);
     }
 }

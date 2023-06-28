@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -58,6 +59,15 @@ Route::middleware('auth')->group(function () {
             Route::get('video/{video}', 'video_show');
             Route::delete('video/{video}', 'video_delete');
             Route::get('/dataVideo', [DocumentController::class, 'dataVideo'])->name('dataVideo');
+        });
+
+        Route::controller(PengajuanController::class)->group(function () {
+            Route::get('event', 'event_index');
+            Route::get('event/{event}/edit', 'event_edit');
+            Route::put('event/{event}', 'event_update');
+            Route::get('event/{event}', 'event_show');
+            Route::delete('event/{event}', 'event_delete');
+            Route::get('/dataEvent', [PengajuanController::class, 'dataEvent'])->name('dataEvent');
         });
     });
 });

@@ -6,15 +6,18 @@
 
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><a href="/video/add" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle me-1"></i> Photo</a></h5>
-                <div class="table-wrapper table-responsive">
-                    <table id="dataVideo" class="table">
+                <div class="table-wrapper table-responsive mt-3">
+                    <table id="dataEvent" class="table">
                         <thead>
                             <th>ID</th>
                             <th>Name</th>
-                            <th>Video</th>
+                            <th>Phone</th>
+                            <th>Event</th>
+                            <th>Start Date</th>
+                            <th>Completion Date</th>
                             <th>Location</th>
-                            <th>Description</th>
+                            <th>Phone</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </thead>
                     </table>

@@ -28,17 +28,17 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link {{ request()->is('event', 'musbangkel', 'event/*', 'musbangkel/*') ? '' : 'collapsed'}}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Pengajuan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content {{ request()->is('event', 'musbangkel', 'event/*', 'musbangkel/*') ? '' : 'collapse'}}" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="forms-elements.html">
+            <a href="/event" class="{{ request()->is('event', 'event/*') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Event</span>
             </a>
           </li>
           <li>
-            <a href="forms-layouts.html">
+            <a href="/musbangkel" class="{{ request()->is('musbangkel', 'musbangkel/*') ? 'active' : '' }}">
               <i class="bi bi-circle"></i><span>Musbangkel</span>
             </a>
           </li>

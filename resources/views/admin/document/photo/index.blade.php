@@ -18,7 +18,6 @@
                         <th>Action</th>
                     </thead>
                 </table>
-                </table>
             </div>
             </div>
         </div>
