@@ -68,6 +68,13 @@ Route::middleware('auth')->group(function () {
             Route::get('event/{event}', 'event_show');
             Route::delete('event/{event}', 'event_delete');
             Route::get('/dataEvent', [PengajuanController::class, 'dataEvent'])->name('dataEvent');
+
+            Route::get('musbangkel', 'musbangkel_index');
+            Route::get('musbangkel/{musbangkel}/edit', 'musbangkel_edit');
+            Route::put('musbangkel/{musbangkel}', 'musbangkel_update');
+            Route::get('musbangkel/{musbangkel}', 'musbangkel_show');
+            Route::delete('musbangkel/{musbangkel}', 'musbangkel_delete');
+            Route::get('/dataMusbangkel', [PengajuanController::class, 'dataMusbangkel'])->name('dataMusbangkel');
         });
     });
 });

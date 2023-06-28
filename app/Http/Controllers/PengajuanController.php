@@ -16,13 +16,19 @@ class PengajuanController extends Controller
     public function dataEvent()
     {
         return DataTables::of(RequestEvent::all())
-        ->addColumn('photo', function ($model) {
-            return view('admin.document.photo.data-photo', compact('model'))->render();
+        ->addColumn('date_start', function ($model) {
+            return view('admin.pengajuan.event.data-date-start', compact('model'))->render();
+        })
+        ->addColumn('date_done', function ($model) {
+            return view('admin.pengajuan.event.data-date-done', compact('model'))->render();
+        })
+        ->addColumn('status', function ($model) {
+            return view('admin.pengajuan.event.data-status', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
-            return view('admin.document.photo.form-action', compact('model'))->render();
+            return view('admin.pengajuan.event.form-action', compact('model'))->render();
         })
-        ->rawColumns(['photo', 'action'])
+        ->rawColumns(['status', 'action'])
         ->make(true);
     }
 }
