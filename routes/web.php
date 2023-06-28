@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,19 @@ Route::middleware('auth')->group(function () {
         Route::get('logout', 'index');
     });
 
+    Route::group(['middleware' => ['cekUserLogin:rukun warga']], function () {
+        Route::controller(RequestController::class)->group(function () {
+            Route::get('request', 'index');
+            Route::get('request/add', 'create');
+            Route::post('request', 'store');
+            Route::get('request/{request}/edit', 'edit');
+            Route::put('request/{musbangkel}', 'update');
+            Route::get('request/{request}', 'show');
+            Route::delete('request/{request}', 'destroy');
+            Route::get('/dataRequest', [RequestController::class, 'dataRequest'])->name('dataRequest');
+        });
+    });
+
     Route::group(['middleware' => ['cekUserLogin:admin']], function () {
         Route::controller(MasterController::class)->group(function () {
             Route::get('rw', 'rw_index');
@@ -56,7 +70,6 @@ Route::middleware('auth')->group(function () {
             Route::post('rw', 'rw_store');
             Route::get('rw/{rw}/edit', 'rw_edit');
             Route::put('rw/{rw}', 'rw_update');
-            Route::get('rw/{photo}', 'rw_show');
             Route::delete('rw/{rw}', 'rw_destroy');
             Route::get('/dataRukunWarga', [MasterController::class, 'dataRukunWarga'])->name('dataRukunWarga');
         });

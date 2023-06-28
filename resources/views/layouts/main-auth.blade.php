@@ -72,10 +72,12 @@
     <script src="{{ asset('/') }}js/pre-image.js"></script>
     <script src="{{ asset('/') }}js/pre-video.js"></script>
     <script src="{{ asset('/') }}js/button-custom.js"></script>
-    @if (auth()->user()->level == 'admin')
-      <script src="{{ asset('/') }}js/admin.js"></script>
-    @else
-      <script src="{{ asset('/') }}js/rukun-warga.js"></script>
-    @endif
+    @auth
+      @if (auth()->user()->level == 'admin')
+        <script src="{{ asset('/') }}js/admin.js"></script>
+      @else
+        <script src="{{ asset('/') }}js/rukun-warga.js"></script>
+      @endif
+    @endauth
 </body>
 </html>

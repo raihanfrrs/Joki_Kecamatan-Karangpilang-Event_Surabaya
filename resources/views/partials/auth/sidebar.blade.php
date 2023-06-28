@@ -9,9 +9,10 @@
         </a>
       </li>
 
+      @if (auth()->user()->level == 'admin')
       <li class="nav-item">
         <a class="nav-link {{ request()->is('rw', 'rw/*') ? '' : 'collapsed'}}" data-bs-target="#masters-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
+          <i class="bi bi-wrench"></i><span>Data Master</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="masters-nav" class="nav-content {{ request()->is('rw', 'rw/*') ? '' : 'collapse'}}" data-bs-parent="#sidebar-nav">
           <li>
@@ -57,6 +58,16 @@
           </li>
         </ul>
       </li>
+      @endif
+
+      @if (auth()->user()->level == 'rukun warga')
+      <li class="nav-item">
+        <a class="nav-link {{ request()->is('request') ? '' : 'collapsed' }}" href="/request">
+          <i class="bi bi-journal-text"></i>
+          <span>Musbangkel</span>
+        </a>
+      </li>
+      @endif
 
     </ul>
 
