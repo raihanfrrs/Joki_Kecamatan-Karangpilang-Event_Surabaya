@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -22,6 +23,13 @@ use App\Http\Controllers\RegisterController;
 
 Route::controller(LayoutController::class)->group(function () {
     Route::get('/', 'index');
+});
+
+Route::controller(DashboardController::class)->group(function () {
+    Route::get('dashboard/countRukunWarga', 'countRukunWarga');
+    Route::get('dashboard/countPhoto', 'countPhoto');
+    Route::get('dashboard/countEvent', 'countEvent');
+    Route::get('dashboard/countMusbangkel', 'countMusbangkel');
 });
 
 Route::middleware('guest')->group(function () {
