@@ -14,7 +14,6 @@
                     <label class="col-sm-2 col-form-label">Request Type</label>
                     <div class="col-sm-10">
                       <select class="form-select" name="request_type">
-                        <option selected>Type</option>
                         <option value="fisik">Fisik</option>
                         <option value="barang">Barang</option>
                       </select>

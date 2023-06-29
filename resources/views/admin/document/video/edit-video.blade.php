@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                   <label for="video" class="col-sm-2 col-form-label">Video Upload</label>
                   <div class="col-sm-10">
-                    <input class="form-control @error('video') is-invalid @enderror" type="file" id="video" name="video" onchange="previewVideo()" required>
+                    <input class="form-control @error('video') is-invalid @enderror" type="file" id="video" name="video" onchange="previewVideo()">
                     @error('video') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     @if ($video->video)
                         <video controls class="video-preview mt-3 w-50">

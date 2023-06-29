@@ -8,7 +8,7 @@
         <div class="d-flex justify-content-center py-4">
           <a href="index.html" class="logo d-flex align-items-center w-auto">
             <img src="{{ asset('/') }}img/logo.png">
-            <span class="d-none d-lg-block">Kecamatan Karangpilang</span>
+            <span class="d-none d-lg-block">Kelurahan Karangpilang</span>
           </a>
         </div><!-- End Logo -->
 

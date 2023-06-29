@@ -6,7 +6,7 @@
 
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title"><a href="/video/add" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle me-1"></i> Photo</a></h5>
+                <h5 class="card-title"><a href="/video/add" class="btn btn-primary btn-sm"><i class="bi bi-plus-circle me-1"></i> Video</a></h5>
                 <div class="table-wrapper table-responsive">
                     <table id="dataVideo" class="table">
                         <thead>

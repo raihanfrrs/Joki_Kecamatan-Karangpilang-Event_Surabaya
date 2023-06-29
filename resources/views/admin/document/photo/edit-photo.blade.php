@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                   <label for="photo" class="col-sm-2 col-form-label">Photo Upload</label>
                   <div class="col-sm-10">
-                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo">
+                    <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo" onchange="previewImage()">
                     @error('photo') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     @if ($photo->photo)
                       <img src="{{ asset('storage/'. $photo->photo) }}" class="img-preview img-fluid mt-3 col-sm-5" />
