@@ -11,6 +11,7 @@ use App\Http\Controllers\PengajuanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\WargaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,10 @@ Route::middleware('guest')->group(function () {
     Route::controller(RegisterController::class)->group(function () {
         Route::get('register', 'index')->name('register');
         Route::post('register', 'store');
+    });
+
+    Route::controller(WargaController::class)->group(function () {
+        Route::get('pengajuan', 'index');
     });
 });
 
