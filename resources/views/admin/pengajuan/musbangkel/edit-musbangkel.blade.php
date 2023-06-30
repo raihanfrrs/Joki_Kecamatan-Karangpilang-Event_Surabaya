@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">Musbangkel Request Form</h5>
-            <form action="/musbangkel/{{ $request->id }}" method="POST" enctype="multipart/form-data">
+            <form action="/musbangkel/{{ $request->id }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">

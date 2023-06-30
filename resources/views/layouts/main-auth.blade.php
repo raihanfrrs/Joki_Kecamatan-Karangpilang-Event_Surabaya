@@ -7,6 +7,9 @@
 
   <title>Kelurahan Karangpilang</title>
 
+  <!-- Favicon -->
+  <link href="{{ asset('/') }}img/logo.png" rel="icon">
+
   <!-- ========== VENDOR CSS ========= -->
   <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-5.2.2-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-icons/bootstrap-icons.css" />

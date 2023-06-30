@@ -58,6 +58,7 @@ Route::middleware('guest')->group(function () {
 
     Route::controller(WargaController::class)->group(function () {
         Route::get('pengajuan', 'index');
+        Route::post('pengajuan', 'store');
     });
 });
 
@@ -114,6 +115,7 @@ Route::middleware('auth')->group(function () {
             Route::get('event', 'event_index');
             Route::get('event/{event}/edit', 'event_edit');
             Route::put('event/{event}', 'event_update');
+            Route::get('event/{event}/status', 'event_update_status');
             Route::get('event/{event}', 'event_show');
             Route::delete('event/{event}', 'event_destroy');
             Route::get('/dataEvent', [PengajuanController::class, 'dataEvent'])->name('dataEvent');

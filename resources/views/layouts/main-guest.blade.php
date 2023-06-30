@@ -13,13 +13,18 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-icons/bootstrap-icons.css" />
 
+
     <!-- Libraries Stylesheet -->
     <link href="{{ asset('/') }}vendor/animate/animate.min.css" rel="stylesheet">
     <link href="{{ asset('/') }}vendor/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <link href="{{ asset('/') }}vendor/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/') }}vendor/sweetalert2/sweetalert2.min.css"/>
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="{{ asset('/') }}vendor/bootstrap/css/bootstrap-custom.min.css" rel="stylesheet">
+
+    <!-- ========== VENDOR JS ========= -->
+    <script src="{{ asset('/') }}vendor/sweetalert2/sweetalert2.min.js" type="text/javascript"></script>
 
     <!-- Template Stylesheet -->
     <link href="{{ asset('/') }}css/style.css" rel="stylesheet">
@@ -30,6 +35,8 @@
     @include('partials.guest.spinner')
 
     @include('partials.guest.header')
+
+    @include('partials.flasher')
 
     @include('partials.guest.carousel')
 

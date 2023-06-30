@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\RequestEvent;
-use App\Models\RequestMusbangkel;
 use Illuminate\Http\Request;
+use App\Models\RequestMusbangkel;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class PengajuanController extends Controller
@@ -12,6 +13,75 @@ class PengajuanController extends Controller
     public function event_index()
     {
         return view('admin.pengajuan.event.index');
+    }
+
+    public function event_edit(RequestEvent $event)
+    {
+        return view('admin.pengajuan.event.edit-event')->with([
+            'request' => $event
+        ]);
+    }
+
+    public function event_update(Request $request, RequestEvent $event)
+    {
+        $rules = [
+            'name' => 'required|min:2|max:255',
+            'event' => 'required|min:2|max:255',
+            'date_start' => 'required|date',
+            'date_done' => 'required|date',
+            'location' => 'required',
+            'phone' => 'required|numeric',
+            'proposal' => 'mimes:pdf|max:2048',
+            'surat_permohonan' => 'mimes:pdf|max:2048'
+        ];
+
+        $validateData = $request->validate($rules);
+
+        if ($request->file('proposal')) {
+            if ($event->proposal) {
+                Storage::delete($event->proposal);
+            }
+            $validateData['proposal'] = $request->file('proposal')->store('proposal');
+        }
+
+        if ($request->file('surat_permohonan')) {
+            if ($event->surat_permohonan) {
+                Storage::delete($event->surat_permohonan);
+            }
+            $validateData['surat_permohonan'] = $request->file('surat_permohonan')->store('surat-permohonan');
+        }
+
+        $validateData['slug'] = slug($request->name);
+
+        $events = $event->update($validateData);
+
+        if ($events) {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Success!'
+            ]);
+        } else {
+            return redirect('event')->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Failed!'
+            ]);
+        }
+    }
+
+    public function event_update_status(Request $request, RequestEvent $event)
+    {
+        return $event->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
+    }
+
+    public function event_show(RequestEvent $event)
+    {
+        return view('admin.pengajuan.event.show-event')->with([
+            'request' => $event
+        ]);
     }
 
     public function event_destroy(RequestEvent $event)

@@ -67,3 +67,33 @@ $(document).on('change', '#statusMusbangkel', function () {
         }
     });
 });
+
+$(document).on('change', '#statusEvent', function () {
+    let selectedOption = $(this).find('option:selected');
+    let status = selectedOption.val();
+    let event = $(this).data('key');
+
+    $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content")
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "/event/"+event+"/status",
+        data: {
+            "status": status
+        },
+        success: function(data){
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Status Updated!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            location.reload();
+        }
+    });
+});

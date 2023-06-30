@@ -16,7 +16,6 @@
                             <th>Start Date</th>
                             <th>Completion Date</th>
                             <th>Location</th>
-                            <th>Phone</th>
                             <th>Status</th>
                             <th>Action</th>
                         </thead>
