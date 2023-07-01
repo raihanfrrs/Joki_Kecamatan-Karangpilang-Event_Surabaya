@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PhotoEvent;
 use App\Models\RequestEvent;
+use App\Models\VideoEvent;
 use Illuminate\Http\Request;
 
 class WargaController extends Controller
@@ -10,6 +12,20 @@ class WargaController extends Controller
     public function index()
     {
         return view('warga.pengajuan.index');
+    }
+
+    public function photo()
+    {
+        return view('warga.photo.index')->with([
+            'photos' => PhotoEvent::all()
+        ]);
+    }
+
+    public function video()
+    {
+        return view('warga.video.index')->with([
+            'videos' => VideoEvent::all()
+        ]);
     }
 
     public function store(Request $request)

@@ -51,12 +51,9 @@ Route::middleware('guest')->group(function () {
         Route::post('login', 'store');
     });
 
-    Route::controller(RegisterController::class)->group(function () {
-        Route::get('register', 'index')->name('register');
-        Route::post('register', 'store');
-    });
-
     Route::controller(WargaController::class)->group(function () {
+        Route::get('read/photo', 'photo');
+        Route::get('read/video', 'video');
         Route::get('pengajuan', 'index');
         Route::post('pengajuan', 'store');
     });

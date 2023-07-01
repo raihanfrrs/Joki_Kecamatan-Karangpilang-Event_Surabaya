@@ -14,6 +14,11 @@
             </div>
             @endforeach
         </div>
+        @if ($allPhotos->count() > 8)
+        <div class="row mt-3">
+            <a href="/read/photo" class="text-center">Read More...</a>
+        </div>
+        @endif
     </div>
 </div>
 
@@ -36,5 +41,10 @@
             </div>
             @endforeach
         </div>
+        @if ($allVideos->count() > 8)
+        <div class="row mt-3">
+            <a href="/read/video" class="text-center">Read More...</a>
+        </div>
+        @endif
     </div>
 </div>

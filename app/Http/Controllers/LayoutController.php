@@ -15,7 +15,9 @@ class LayoutController extends Controller
         } else {
             return view('welcome-guest')->with([
                 'photos' => PhotoEvent::orderBy('id', 'desc')->limit(8)->get(),
-                'videos' => VideoEvent::orderBy('id', 'desc')->limit(8)->get()
+                'videos' => VideoEvent::orderBy('id', 'desc')->limit(8)->get(),
+                'allPhotos' => PhotoEvent::all(),
+                'allVideos' => VideoEvent::all()
             ]);
         }
         
