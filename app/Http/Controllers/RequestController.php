@@ -22,8 +22,8 @@ class RequestController extends Controller
     {
         $validateData = $request->validate([
             'request_type' => 'required',
-            'size' => 'required|min:2|max:255',
-            'amount' => 'required|min:2|max:255',
+            'size' => 'min:2|max:255',
+            'amount' => 'min:2|max:255',
             'location' => 'required'
         ]);
 
@@ -60,8 +60,8 @@ class RequestController extends Controller
     {
         $validateData = $request->validate([
             'request_type' => 'required',
-            'size' => 'required|min:2|max:255',
-            'amount' => 'required|min:2|max:255',
+            'size' => 'min:2|max:255',
+            'amount' => 'min:2|max:255',
             'location' => 'required'
         ]);
 
