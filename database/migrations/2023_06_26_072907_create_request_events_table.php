@@ -26,7 +26,9 @@ class CreateRequestEventsTable extends Migration
             $table->string('phone');
             $table->string('proposal');
             $table->string('surat_permohonan');
-            $table->enum('status', ['terima', 'proses', 'tolak']);
+            $table->enum('status', ['terima', 'proses', 'tolak', 'selesai']);
+            $table->enum('status_proposal', ['terima', 'proses', 'tolak']);
+            $table->enum('status_permohonan', ['terima', 'proses', 'tolak']);
             $table->timestamps();
         });
     }
