@@ -21,6 +21,13 @@ class AdminSeeder extends Seeder
                 'slug' => 'raihan-farras',
                 'phone' => '081333903187',
                 'email' => 'rehanfarras76@gmail.com'
+            ],
+            [
+                'user_id' => 3,
+                'name' => 'Ari Ferdiansyah',
+                'slug' => 'ari-ferdiansyah',
+                'phone' => '0811212332432',
+                'email' => 'rehanfar@gmail.com'
             ]
         ];
 

@@ -8,6 +8,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class RequestController extends Controller
 {
+    //Masuk ke halaman utamaa dari rukun warga request index
     public function index()
     {
         return view('rukun-warga.request.index');
@@ -28,7 +29,7 @@ class RequestController extends Controller
         ]);
 
         $validateData['status'] = 'proses';
-        $validateData['rukun_warga_id'] = auth()->user()->rukun_warga[0]->id;
+        $validateData['rukun_warga_id'] = auth()->user()->rukun_warga[0]->id; // menyimpan id autghentikasi
 
         $request = RequestMusbangkel::create($validateData);
 
@@ -80,6 +81,13 @@ class RequestController extends Controller
                 'message' => 'Update Failed!'
             ]);
         }
+    }
+
+    public function show(RequestMusbangkel $request)
+    {
+        return view('rukun-warga.request.show-request')->with([
+            'request' => $request
+        ]);
     }
 
     public function destroy(RequestMusbangkel $request)

@@ -48,7 +48,7 @@
         <main id="main" class="main">
             @include('partials.auth.breadcrumb-title')
             
-            <section class="section {{ request()->is('/') ? 'dashboard' : (request()->is('profile') ? 'profile' : '') }}">
+            <section class="section {{ request()->is('/') ? 'dashboard' : (request()->is('profile', 'event/*', 'request/*', 'musbangkel/*') ? 'profile' : '') }}">
                 @yield('section-auth')
             </section>
         </main>

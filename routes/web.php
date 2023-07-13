@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
             Route::get('request/add', 'create');
             Route::post('request', 'store');
             Route::get('request/{request}/edit', 'edit');
-            Route::put('request/{musbangkel}', 'update');
+            Route::put('request/{musbangkel}', 'update'); // put ya patch
             Route::get('request/{request}', 'show');
             Route::delete('request/{request}', 'destroy');
             Route::get('/dataRequest', [RequestController::class, 'dataRequest'])->name('dataRequest');
@@ -86,6 +86,9 @@ Route::middleware('auth')->group(function () {
             Route::put('rw/{rw}', 'rw_update');
             Route::delete('rw/{rw}', 'rw_destroy');
             Route::get('/dataRukunWarga', [MasterController::class, 'dataRukunWarga'])->name('dataRukunWarga');
+
+            Route::get('admin', 'admin_index');
+            Route::get('/dataAdmin', [MasterController::class, 'dataAdmin'])->name('dataAdmin');
         });
 
         Route::controller(DocumentController::class)->group(function () {
@@ -112,6 +115,9 @@ Route::middleware('auth')->group(function () {
             Route::get('event', 'event_index');
             Route::get('event/{event}/edit', 'event_edit');
             Route::put('event/{event}', 'event_update');
+            Route::put('event/{event}/proposal', 'event_update_proposal');
+            Route::put('event/{event}/permohonan', 'event_update_permohonan');
+            Route::put('event/{event}', 'event_update');
             Route::get('event/{event}/status', 'event_update_status');
             Route::get('event/{event}', 'event_show');
             Route::delete('event/{event}', 'event_destroy');
@@ -121,6 +127,7 @@ Route::middleware('auth')->group(function () {
             Route::get('musbangkel/{musbangkel}/edit', 'musbangkel_edit');
             Route::put('musbangkel/{musbangkel}', 'musbangkel_update');
             Route::get('musbangkel/{musbangkel}/status', 'musbangkel_update_status');
+            Route::get('musbangkel/{musbangkel}', 'musbangkel_show');
             Route::delete('musbangkel/{musbangkel}', 'musbangkel_destroy');
             Route::get('/dataMusbangkel', [PengajuanController::class, 'dataMusbangkel'])->name('dataMusbangkel');
         });

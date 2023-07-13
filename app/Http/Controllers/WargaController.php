@@ -50,6 +50,8 @@ class WargaController extends Controller
         }
 
         $validateData['status'] = 'proses';
+        $validateData['status_proposal'] = 'proses';
+        $validateData['status_permohonan'] = 'proses';
         $validateData['slug'] = $request->name;
 
         $request = RequestEvent::create($validateData);

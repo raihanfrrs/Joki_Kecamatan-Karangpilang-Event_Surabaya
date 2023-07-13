@@ -77,6 +77,44 @@ class PengajuanController extends Controller
         return $event->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
     }
 
+    public function event_update_proposal(Request $request, RequestEvent $event)
+    {
+        if ($event->update(['status_proposal' => $request->status])) {
+            return redirect()->back()->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Success!'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Failed!'
+            ]);
+        }
+    }
+
+    public function event_update_permohonan(Request $request, RequestEvent $event)
+    {
+        if ($event->update(['status_permohonan' => $request->status])) {
+            return redirect()->back()->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Success!'
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Failed!'
+            ]);
+        }
+    }
+
     public function event_show(RequestEvent $event)
     {
         return view('admin.pengajuan.event.show-event')->with([
@@ -138,9 +176,10 @@ class PengajuanController extends Controller
     {
         $validateData = $request->validate([
             'request_type' => 'required',
-            'size' => 'required|min:2|max:255',
-            'amount' => 'required|min:2|max:255',
-            'location' => 'required'
+            'size' => 'min:2|max:255',
+            'amount' => 'min:2|max:255',
+            'location' => 'required',
+            'feedback' => 'max:255',
         ]);
 
         if ($musbangkel->update($validateData)) {
@@ -163,6 +202,13 @@ class PengajuanController extends Controller
     public function musbangkel_update_status(Request $request, RequestMusbangkel $musbangkel)
     {
         return $musbangkel->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
+    }
+
+    public function musbangkel_show(RequestMusbangkel $musbangkel)
+    {
+        return view('admin.pengajuan.musbangkel.show-musbangkel')->with([
+            'request' => $musbangkel
+        ]);
     }
 
     public function musbangkel_destroy(RequestMusbangkel $musbangkel)

@@ -1,4 +1,5 @@
 <select name="status" id="statusEvent" class="default-select form-control wide text-center" data-key="{{ $model->slug }}">
+    <option value="selesai" {{ $model->status == 'selesai' ? 'selected' : '' }}>Selesai</option>
     <option value="terima" {{ $model->status == 'terima' ? 'selected' : '' }}>Terima</option>
     <option value="proses" {{ $model->status == 'proses' ? 'selected' : '' }}>Proses</option>
     <option value="tolak" {{ $model->status == 'tolak' ? 'selected' : '' }}>Tolak</option>

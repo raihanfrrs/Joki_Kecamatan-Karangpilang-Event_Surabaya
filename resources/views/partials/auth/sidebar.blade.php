@@ -20,6 +20,11 @@
               <i class="bi bi-circle"></i><span>Rukun Warga</span>
             </a>
           </li>
+          <li>
+            <a href="/admin" class="{{ request()->is('admin', 'admin/*') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Admin</span>
+            </a>
+          </li>
         </ul>
       </li>
 
@@ -62,7 +67,7 @@
 
       @if (auth()->user()->level == 'rukun warga')
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('request') ? '' : 'collapsed' }}" href="/request">
+        <a class="nav-link {{ request()->is('request', 'request/*') ? '' : 'collapsed' }}" href="/request">
           <i class="bi bi-journal-text"></i>
           <span>Musbangkel</span>
         </a>
