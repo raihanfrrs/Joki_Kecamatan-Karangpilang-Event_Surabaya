@@ -22,6 +22,7 @@ class RequestController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
+            'name' => 'required',
             'request_type' => 'required',
             'size' => 'min:2|max:255',
             'amount' => 'min:2|max:255',
@@ -60,6 +61,7 @@ class RequestController extends Controller
     public function update(Request $request, RequestMusbangkel $musbangkel)
     {
         $validateData = $request->validate([
+            'name' => 'required',
             'request_type' => 'required',
             'size' => 'min:2|max:255',
             'amount' => 'min:2|max:255',

@@ -19,6 +19,7 @@ class CreateRequestMusbangkelsTable extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class)->nullable();
             $table->foreignIdFor(RukunWarga::class);
+            $table->string('name');
             $table->string('request_type');
             $table->string('size')->nullable();
             $table->string('amount')->nullable();

@@ -10,6 +10,15 @@
             <form action="/request/{{ $request->id }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
+
+                <div class="row mb-3">
+                  <label for="name" class="col-sm-2 col-form-label">Name</label>
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" autocomplete="off" required value="{{ old('name', $request->name) }}">
+                    @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                  </div>
+                </div>
+
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">Request Type</label>
                     <div class="col-sm-10">
@@ -22,7 +31,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <label for="location" class="col-sm-2 col-form-label">Size</label>
+                    <label for="size" class="col-sm-2 col-form-label">Size</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control @error('size') is-invalid @enderror" id="size" name="size" autocomplete="off" required value="{{ old('size', $request->size) }}">
                       @error('size') <div class="invalid-feedback">{{ $message }}</div> @enderror

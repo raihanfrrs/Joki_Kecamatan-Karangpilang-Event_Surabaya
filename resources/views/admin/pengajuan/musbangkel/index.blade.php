@@ -11,6 +11,7 @@
                         <thead>
                             <th>ID</th>
                             <th>Rukun Warga</th>
+                            <th>Name</th>
                             <th>Request Type</th>
                             <th>Size</th>
                             <th>Amount</th>

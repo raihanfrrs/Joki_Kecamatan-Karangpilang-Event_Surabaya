@@ -12,6 +12,7 @@
                     <thead>
                         <th>ID</th>
                         <th>Admin</th>
+                        <th>Name</th>
                         <th>Request Type</th>
                         <th>Size</th>
                         <th>Amount</th>
