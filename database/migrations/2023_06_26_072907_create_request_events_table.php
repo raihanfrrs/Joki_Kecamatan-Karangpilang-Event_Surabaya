@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\RukunWarga;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ class CreateRequestEventsTable extends Migration
         Schema::create('request_events', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Admin::class)->nullable();
+            $table->foreignIdFor(RukunWarga::class);
             $table->string('name');
             $table->string('event');
             $table->string('slug');

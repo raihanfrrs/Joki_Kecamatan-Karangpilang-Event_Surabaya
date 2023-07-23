@@ -36,4 +36,9 @@ class RukunWarga extends Model
     {
         return $this->hasMany(RequestMusbangkel::class);
     }
+
+    public function request_event()
+    {
+        return $this->hasMany(RequestEvent::class);
+    }
 }

@@ -26,4 +26,9 @@ class RequestEvent extends Model
             ]
         ];
     }
+
+    public function rukun_warga()
+    {
+        return $this->belongsTo(RukunWarga::class);
+    }
 }
