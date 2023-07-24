@@ -67,10 +67,21 @@
 
       @if (auth()->user()->level == 'rukun warga')
       <li class="nav-item">
-        <a class="nav-link {{ request()->is('request', 'request/*') ? '' : 'collapsed' }}" href="/request">
-          <i class="bi bi-journal-text"></i>
-          <span>Musbangkel</span>
+        <a class="nav-link {{ request()->is('request/event', 'request/musbangkel', 'request/event/*', 'request/musbangkel/*') ? '' : 'collapsed'}}" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Pengajuan</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="forms-nav" class="nav-content {{ request()->is('request/event', 'request/musbangkel', 'request/event/*', 'request/musbangkel/*') ? '' : 'collapse'}}" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="/request/event" class="{{ request()->is('request/event', 'request/event/*') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Event</span>
+            </a>
+          </li>
+          <li>
+            <a href="/request/musbangkel" class="{{ request()->is('request/musbangkel', 'request/musbangkel/*') ? 'active' : '' }}">
+              <i class="bi bi-circle"></i><span>Musbangkel</span>
+            </a>
+          </li>
+        </ul>
       </li>
       @endif
 

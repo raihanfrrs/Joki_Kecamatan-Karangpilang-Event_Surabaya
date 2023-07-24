@@ -21,8 +21,6 @@ Route::middleware('guest')->group(function () {
     Route::controller(WargaController::class)->group(function () {
         Route::get('read/photo', 'photo');
         Route::get('read/video', 'video');
-        Route::get('pengajuan', 'index');
-        Route::post('pengajuan', 'store');
     });
 });
 

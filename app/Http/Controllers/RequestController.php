@@ -9,17 +9,17 @@ use Yajra\DataTables\Facades\DataTables;
 class RequestController extends Controller
 {
     //Masuk ke halaman utamaa dari rukun warga request index
-    public function index()
+    public function index_musbangkel()
     {
-        return view('rukun-warga.request.index');
+        return view('rukun-warga.request.musbangkel.index');
     }
 
-    public function create()
+    public function create_musbangkel()
     {
-        return view('rukun-warga.request.add-request');
+        return view('rukun-warga.request.musbangkel.add-musbangkel');
     }
 
-    public function store(Request $request)
+    public function store_musbangkel(Request $request)
     {
         $validateData = $request->validate([
             'name' => 'required',
@@ -30,19 +30,19 @@ class RequestController extends Controller
         ]);
 
         $validateData['status'] = 'proses';
-        $validateData['rukun_warga_id'] = auth()->user()->rukun_warga[0]->id; // menyimpan id autghentikasi
+        $validateData['rukun_warga_id'] = auth()->user()->rukun_warga[0]->id;
 
         $request = RequestMusbangkel::create($validateData);
 
         if ($request) {
-            return redirect('request/add')->with([
+            return redirect('request/musbangkel/add')->with([
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
                 'message' => 'Request Success!'
             ]);
         } else {
-            return redirect('request/add')->with([
+            return redirect('request/musbangkel/add')->with([
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
@@ -51,14 +51,14 @@ class RequestController extends Controller
         }
     }
 
-    public function edit(RequestMusbangkel $request)
+    public function edit_musbangkel(RequestMusbangkel $musbangkel)
     {
-        return view('rukun-warga.request.edit-request')->with([
-            'request' => $request
+        return view('rukun-warga.request.musbangkel.edit-musbangkel')->with([
+            'request' => $musbangkel
         ]);
     }
 
-    public function update(Request $request, RequestMusbangkel $musbangkel)
+    public function update_musbangkel(Request $request, RequestMusbangkel $musbangkel)
     {
         $validateData = $request->validate([
             'name' => 'required',
@@ -85,16 +85,16 @@ class RequestController extends Controller
         }
     }
 
-    public function show(RequestMusbangkel $request)
+    public function show_musbangkel(RequestMusbangkel $musbangkel)
     {
-        return view('rukun-warga.request.show-request')->with([
-            'request' => $request
+        return view('rukun-warga.request.musbangkel.show-musbangkel')->with([
+            'request' => $musbangkel
         ]);
     }
 
-    public function destroy(RequestMusbangkel $request)
+    public function destroy_musbangkel(RequestMusbangkel $musbangkel)
     {
-        if ($request->delete()) {
+        if ($musbangkel->delete()) {
             return redirect('request')->with([
                 'case' => 'default',
                 'position' => 'center',
@@ -111,17 +111,17 @@ class RequestController extends Controller
         }
     }
 
-    public function dataRequest()
+    public function dataRequestMusbangkel()
     {
         return DataTables::of(RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga[0]->id)->get())
         ->addColumn('admin', function ($model) {
-            return view('rukun-warga.request.data-admin', compact('model'))->render();
+            return view('rukun-warga.request.musbangkel.data-admin', compact('model'))->render();
         })
         ->addColumn('status', function ($model) {
-            return view('rukun-warga.request.data-status', compact('model'))->render();
+            return view('rukun-warga.request.musbangkel.data-status', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
-            return view('rukun-warga.request.form-action', compact('model'))->render();
+            return view('rukun-warga.request.musbangkel.form-action', compact('model'))->render();
         })
         ->rawColumns(['admin', 'status', 'action'])
         ->make(true);
