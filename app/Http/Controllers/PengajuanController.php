@@ -68,6 +68,7 @@ class PengajuanController extends Controller
             }
 
             $validatedData['slug'] = slug($request->event);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
         
             $event->update($validatedData);
         
@@ -221,41 +222,67 @@ class PengajuanController extends Controller
     public function musbangkel_edit(RequestMusbangkel $musbangkel)
     {
         return view('admin.pengajuan.musbangkel.edit-musbangkel')->with([
-            'request' => $musbangkel
+            'musbangkel' => $musbangkel
         ]);
     }
 
     public function musbangkel_update(Request $request, RequestMusbangkel $musbangkel)
     {
-        $validateData = $request->validate([
-            'name' => 'required',
-            'request_type' => 'required',
-            'size' => 'min:2|max:255',
-            'amount' => 'min:2|max:255',
-            'location' => 'required',
-            'feedback' => 'max:255',
-        ]);
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255|unique:request_musbangkels,name,' . $musbangkel->id,
+                'request_type' => 'required',
+                'size' => 'min:2|max:255',
+                'amount' => 'min:2|max:255',
+                'location' => 'required',
+                'photo' => 'image|file|max:2048',
+                'video' => 'mimetypes:video/mp4,video/quicktime|max:100000'
+            ])->validate();
 
-        if ($musbangkel->update($validateData)) {
-            return redirect('musbangkel')->with([
+            if ($request->file('photo')) {
+                if ($musbangkel->photo) {
+                    Storage::delete($musbangkel->photo);
+                }
+
+                $validatedData['photo'] = $request->file('photo')->store('photo-event');
+            }
+
+            if ($request->file('video')) {
+                if ($musbangkel->video) {
+                    Storage::delete($musbangkel->video);
+                }
+
+                $validatedData['video'] = $request->file('video')->store('video-event');
+            }
+
+            $validatedData['slug'] = slug($request->name);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
+        
+            $musbangkel->update($validatedData);
+        
+            return redirect()->intended('/musbangkel')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Update Success!'
+                'message' => 'Update Musbangkel Success!'
             ]);
-        } else {
-            return redirect('musbangkel')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Update Failed!'
+                'message' => 'Update Musbangkel Failed!'
             ]);
         }
     }
 
     public function musbangkel_update_status(Request $request, RequestMusbangkel $musbangkel)
     {
-        return $musbangkel->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
+        return $musbangkel->update(['status' => $request->status, 'admin_id' => auth()->user()->admin->id]);
     }
 
     public function musbangkel_show(RequestMusbangkel $musbangkel)
@@ -284,6 +311,37 @@ class PengajuanController extends Controller
         }
     }
 
+    public function musbangkel_update_feedback(Request $request, RequestMusbangkel $musbangkel)
+    {
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'feedback' => 'required'
+            ])->validate();
+
+            $validatedData['admin_id'] = auth()->user()->admin->id;
+        
+            $musbangkel->update($validatedData);
+        
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Feedback Success!'
+            ]);
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Feedback Failed!'
+            ]);
+        }
+    }
+
     public function dataMusbangkel()
     {
         return DataTables::of(RequestMusbangkel::all())
@@ -292,6 +350,9 @@ class PengajuanController extends Controller
         })
         ->addColumn('status', function ($model) {
             return view('admin.pengajuan.musbangkel.data-status', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('admin.pengajuan.musbangkel.data-created-at', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('admin.pengajuan.musbangkel.form-action', compact('model'))->render();

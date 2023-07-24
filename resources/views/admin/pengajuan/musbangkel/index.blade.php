@@ -17,6 +17,7 @@
                             <th>Amount</th>
                             <th>Location</th>
                             <th>Status</th>
+                            <th>Requested At</th>
                             <th>Action</th>
                         </thead>
                     </table>

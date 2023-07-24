@@ -60,6 +60,7 @@ Route::middleware('auth')->group(function () {
             Route::put('musbangkel/{musbangkel}', 'musbangkel_update');
             Route::get('musbangkel/{musbangkel}/status', 'musbangkel_update_status');
             Route::get('musbangkel/{musbangkel}', 'musbangkel_show');
+            Route::put('musbangkel/{musbangkel}/feedback', 'musbangkel_update_feedback');
             Route::delete('musbangkel/{musbangkel}', 'musbangkel_destroy');
             Route::get('/dataMusbangkel', [PengajuanController::class, 'dataMusbangkel'])->name('dataMusbangkel');
         });
