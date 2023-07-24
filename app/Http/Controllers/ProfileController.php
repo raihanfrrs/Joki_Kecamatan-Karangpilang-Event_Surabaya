@@ -25,10 +25,10 @@ class ProfileController extends Controller
 
         if (auth()->user()->level == 'admin') {
             $validateData['slug'] = slug($request->name);
-            $profile = Admin::whereId(auth()->user()->admin[0]->id)->update($validateData);
+            $profile = Admin::whereId(auth()->user()->admin->id)->update($validateData);
         }elseif (auth()->user()->level == 'rukun warga') {
             $validateData['slug'] = slug($request->name);
-            $profile = RukunWarga::whereId(auth()->user()->rukun_warga[0]->id)->update($validateData);
+            $profile = RukunWarga::whereId(auth()->user()->rukun_warga->id)->update($validateData);
         }
 
         if ($profile) {
