@@ -5,11 +5,15 @@
     <meta charset="utf-8">
     <title>Kelurahan Karangpilang</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
 
     <!-- Favicon -->
     <link href="{{ asset('/') }}img/logo.png" rel="icon">
 
     <!-- Icon Font Stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/') }}vendor/bootstrap-icons/bootstrap-icons.css" />
 
@@ -34,11 +38,17 @@
     
     @include('partials.guest.spinner')
 
+    @include('partials.guest.top-bar')
+
     @include('partials.guest.header')
 
     @include('partials.flasher')
 
     @include('partials.guest.carousel')
+
+    @include('partials.guest.feature')
+
+    @include('partials.guest.about')
 
     @yield('section-guest')
 

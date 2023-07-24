@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware('auth')->group(function () {
-
     Route::group(['middleware' => ['cekUserLogin:rukun warga']], function () {
         Route::controller(RequestController::class)->group(function () {
             Route::get('request', 'index');
