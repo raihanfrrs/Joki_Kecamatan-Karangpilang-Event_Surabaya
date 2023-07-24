@@ -10,13 +10,13 @@
                     <table id="dataEvent" class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Name</th>
-                            <th>Phone</th>
                             <th>Event</th>
+                            <th>Phone</th>
                             <th>Start Date</th>
                             <th>Completion Date</th>
                             <th>Location</th>
                             <th>Status</th>
+                            <th>Requested At</th>
                             <th>Action</th>
                         </thead>
                     </table>

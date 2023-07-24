@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\RequestMusbangkel;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PengajuanController extends Controller
 {
@@ -18,63 +20,111 @@ class PengajuanController extends Controller
     public function event_edit(RequestEvent $event)
     {
         return view('admin.pengajuan.event.edit-event')->with([
-            'request' => $event
+            'event' => $event
         ]);
     }
 
     public function event_update(Request $request, RequestEvent $event)
     {
-        $rules = [
-            'name' => 'required|min:2|max:255',
-            'event' => 'required|min:2|max:255',
-            'date_start' => 'required|date',
-            'date_done' => 'required|date',
-            'location' => 'required',
-            'phone' => 'required|numeric',
-            'proposal' => 'mimes:pdf|max:2048',
-            'surat_permohonan' => 'mimes:pdf|max:2048'
-        ];
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'event' => 'required|min:2|max:255|unique:request_events,event,' . $event->id,
+                'phone' => 'required|numeric',
+                'date_start' => 'required|date',
+                'date_done' => 'required|date',
+                'location' => 'required',
+                'proposal' => 'mimes:pdf|max:2048',
+                'surat_permohonan' => 'mimes:pdf|max:2048',
+                'photo' => 'image|file|max:2048',
+                'video' => 'mimetypes:video/mp4,video/quicktime|max:100000'
+            ])->validate();
+        
+            if ($request->file('proposal')) {
+                if ($event->proposal) {
+                    Storage::delete($event->surat_proposal);
+                }
 
-        $validateData = $request->validate($rules);
-
-        if ($request->file('proposal')) {
-            if ($event->proposal) {
-                Storage::delete($event->proposal);
+                $validatedData['proposal'] = $request->file('proposal')->store('proposal');
             }
-            $validateData['proposal'] = $request->file('proposal')->store('proposal');
-        }
 
-        if ($request->file('surat_permohonan')) {
-            if ($event->surat_permohonan) {
-                Storage::delete($event->surat_permohonan);
+            if ($request->file('surat_permohonan')) {
+                if ($event->surat_permohonan) {
+                    Storage::delete($event->surat_permohonan);
+                }
+
+                $validatedData['surat_permohonan'] = $request->file('surat_permohonan')->store('surat-permohonan');
             }
-            $validateData['surat_permohonan'] = $request->file('surat_permohonan')->store('surat-permohonan');
-        }
 
-        $validateData['slug'] = slug($request->name);
+            if ($request->file('photo')) {
+                if ($event->photo) {
+                    Storage::delete($event->photo);
+                }
 
-        $events = $event->update($validateData);
+                $validatedData['photo'] = $request->file('photo')->store('photo-event');
+            }
 
-        if ($events) {
-            return redirect('event')->with([
+            if ($request->file('video')) {
+                $validatedData['video'] = $request->file('video')->store('video-event');
+            }
+
+            $validatedData['slug'] = slug($request->event);
+        
+            $event->update($validatedData);
+        
+            return redirect()->intended('/event')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Update Success!'
+                'message' => 'Update Event Success!'
             ]);
-        } else {
-            return redirect('event')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Update Failed!'
+                'message' => 'Update Event Failed!'
             ]);
         }
     }
 
     public function event_update_status(Request $request, RequestEvent $event)
     {
-        return $event->update(['status' => $request->status, 'admin_id' => auth()->user()->admin[0]->id]);
+        return $event->update(['status' => $request->status, 'admin_id' => auth()->user()->admin->id]);
+    }
+
+    public function event_update_feedback(Request $request, RequestEvent $event)
+    {
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'feedback' => 'required'
+            ])->validate();
+
+            $validatedData['admin_id'] = auth()->user()->admin->id;
+        
+            $event->update($validatedData);
+        
+            return redirect()->back()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'success',
+                'message' => 'Update Feedback Success!'
+            ]);
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
+                'case' => 'default',
+                'position' => 'center',
+                'type' => 'error',
+                'message' => 'Update Feedback Failed!'
+            ]);
+        }
     }
 
     public function event_update_proposal(Request $request, RequestEvent $event)
@@ -118,7 +168,7 @@ class PengajuanController extends Controller
     public function event_show(RequestEvent $event)
     {
         return view('admin.pengajuan.event.show-event')->with([
-            'request' => $event
+            'event' => $event
         ]);
     }
 
@@ -152,6 +202,9 @@ class PengajuanController extends Controller
         })
         ->addColumn('status', function ($model) {
             return view('admin.pengajuan.event.data-status', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('admin.pengajuan.event.data-created-at', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('admin.pengajuan.event.form-action', compact('model'))->render();

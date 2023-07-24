@@ -94,8 +94,8 @@ class RequestController extends Controller
                 'date_start' => 'required|date',
                 'date_done' => 'required|date',
                 'location' => 'required',
-                'proposal' => 'required|mimes:pdf|max:2048',
-                'surat_permohonan' => 'required|mimes:pdf|max:2048',
+                'proposal' => 'mimes:pdf|max:2048',
+                'surat_permohonan' => 'mimes:pdf|max:2048',
                 'photo' => 'image|file|max:2048',
                 'video' => 'mimetypes:video/mp4,video/quicktime|max:100000'
             ])->validate();

@@ -29,7 +29,7 @@ class CreateRequestEventsTable extends Migration
             $table->string('surat_permohonan');
             $table->string('photo')->nullable();
             $table->string('video')->nullable();
-            $table->string('feedback')->nullable();
+            $table->text('feedback')->nullable();
             $table->enum('status', ['terima', 'proses', 'tolak', 'selesai'])->default('proses');
             $table->enum('status_proposal', ['terima', 'proses', 'tolak'])->default('proses');
             $table->enum('status_permohonan', ['terima', 'proses', 'tolak'])->default('proses');

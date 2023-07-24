@@ -100,7 +100,7 @@
                     <div class="row mb-3">
                         <label for="proposal" class="col-sm-3 col-form-label">Proposal</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control @error('proposal') is-invalid @enderror" id="iframe" name="proposal" required value="{{ old('proposal') }}" onchange="previewIframe()">
+                            <input type="file" class="form-control @error('proposal') is-invalid @enderror" id="iframe" name="proposal" onchange="previewIframe()">
                             @error('proposal') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             <div class="col-12">
                                 @if ($event->proposal)
@@ -115,7 +115,7 @@
                     <div class="row mb-3">
                         <label for="surat_permohonan" class="col-sm-3 col-form-label">Surat Permohonan</label>
                         <div class="col-sm-9">
-                            <input type="file" class="form-control @error('surat_permohonan') is-invalid @enderror" id="second_iframe" name="surat_permohonan" required value="{{ old('surat_permohonan') }}" onchange="previewSecondIframe()">
+                            <input type="file" class="form-control @error('surat_permohonan') is-invalid @enderror" id="second_iframe" name="surat_permohonan"  onchange="previewSecondIframe()">
                             @error('surat_permohonan') <div class="invalid-feedback">{{ $message }}</div> @enderror
                             <div class="col-12">
                                 @if ($event->surat_permohonan)

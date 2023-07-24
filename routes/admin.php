@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
             Route::put('event/{event}/permohonan', 'event_update_permohonan');
             Route::put('event/{event}', 'event_update');
             Route::get('event/{event}/status', 'event_update_status');
+            Route::put('event/{event}/feedback', 'event_update_feedback');
             Route::get('event/{event}', 'event_show');
             Route::delete('event/{event}', 'event_destroy');
             Route::get('/dataEvent', [PengajuanController::class, 'dataEvent'])->name('dataEvent');

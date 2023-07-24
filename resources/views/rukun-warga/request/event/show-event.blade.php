@@ -56,7 +56,7 @@
 
                     @if ($event->admin_id)
                     <div class="row">
-                        <div class="col-lg-3 col-md-4 label">Handled By</div>
+                        <div class="col-lg-3 col-md-4 label">Handled By Admin</div>
                         <div class="col-lg-9 col-md-8">{{ $event->admin->name }}</div>
                     </div>
                     @endif
