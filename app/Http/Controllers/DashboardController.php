@@ -32,19 +32,19 @@ class DashboardController extends Controller
 
     public function countRequest()
     {
-        return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga[0]->id)->count();
+        return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga->id)->count();
     }
 
     public function countAccepted()
     {
-        return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga[0]->id)
+        return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga->id)
                                 ->where('status', 'terima')
                                 ->count();
     }
 
     public function countRejected()
     {
-        return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga[0]->id)
+    return RequestMusbangkel::where('rukun_warga_id', auth()->user()->rukun_warga->id)
                                 ->where('status', 'tolak')
                                 ->count();
     }
