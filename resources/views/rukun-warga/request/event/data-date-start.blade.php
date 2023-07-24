@@ -1,0 +1,1 @@
+{{ \Carbon\Carbon::parse($model->date_start)->format('d/m/Y') }}

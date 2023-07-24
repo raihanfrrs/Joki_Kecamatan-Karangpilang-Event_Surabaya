@@ -24,11 +24,11 @@ class User extends Authenticatable
 
     public function admin()
     {
-        return $this->hasMany(Admin::class);
+        return $this->hasOne(Admin::class);
     }
 
     public function rukun_warga()
     {
-        return $this->hasMany(RukunWarga::class);
+        return $this->hasOne(RukunWarga::class);
     }
 }

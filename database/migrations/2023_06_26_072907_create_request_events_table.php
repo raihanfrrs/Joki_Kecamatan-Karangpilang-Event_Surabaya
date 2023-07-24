@@ -19,18 +19,20 @@ class CreateRequestEventsTable extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class)->nullable();
             $table->foreignIdFor(RukunWarga::class);
-            $table->string('name');
-            $table->string('event');
+            $table->string('event')->unique();
             $table->string('slug');
             $table->date('date_start');
             $table->date('date_done');
-            $table->string('location');
+            $table->text('location');
             $table->string('phone');
             $table->string('proposal');
             $table->string('surat_permohonan');
-            $table->enum('status', ['terima', 'proses', 'tolak', 'selesai']);
-            $table->enum('status_proposal', ['terima', 'proses', 'tolak']);
-            $table->enum('status_permohonan', ['terima', 'proses', 'tolak']);
+            $table->string('photo')->nullable();
+            $table->string('video')->nullable();
+            $table->string('feedback')->nullable();
+            $table->enum('status', ['terima', 'proses', 'tolak', 'selesai'])->default('proses');
+            $table->enum('status_proposal', ['terima', 'proses', 'tolak'])->default('proses');
+            $table->enum('status_permohonan', ['terima', 'proses', 'tolak'])->default('proses');
             $table->timestamps();
         });
     }

@@ -27,6 +27,11 @@ class RequestEvent extends Model
         ];
     }
 
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
     public function rukun_warga()
     {
         return $this->belongsTo(RukunWarga::class);

@@ -19,12 +19,15 @@ class CreateRequestMusbangkelsTable extends Migration
             $table->id();
             $table->foreignIdFor(Admin::class)->nullable();
             $table->foreignIdFor(RukunWarga::class);
-            $table->string('name');
+            $table->string('name')->unique();
+            $table->string('slug');
             $table->string('request_type');
             $table->string('size')->nullable();
             $table->string('amount')->nullable();
             $table->string('location');
-            $table->enum('status', ['terima', 'proses', 'tolak', 'selesai']);
+            $table->string('photo')->nullable();
+            $table->string('video')->nullable();
+            $table->enum('status', ['terima', 'proses', 'tolak', 'selesai'])->default('proses');
             $table->text('feedback')->nullable();
             $table->timestamps();
         });
