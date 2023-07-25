@@ -16,6 +16,7 @@
                         <th>Event</th>
                         <th>Location</th>
                         <th>Description</th>
+                        <th>Uploaded At</th>
                         <th>Action</th>
                     </thead>
                 </table>

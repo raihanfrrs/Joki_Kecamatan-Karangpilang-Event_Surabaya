@@ -145,6 +145,9 @@ class DocumentController extends Controller
         ->addColumn('photo', function ($model) {
             return view('admin.document.photo.data-photo', compact('model'))->render();
         })
+        ->addColumn('created_at', function ($model) {
+            return view('admin.document.photo.data-uploaded-at', compact('model'))->render();
+        })
         ->addColumn('action', function ($model) {
             return view('admin.document.photo.form-action', compact('model'))->render();
         })
@@ -282,6 +285,9 @@ class DocumentController extends Controller
         })
         ->addColumn('event', function ($model) {
             return view('admin.document.video.data-event', compact('model'))->render();
+        })
+        ->addColumn('created_at', function ($model) {
+            return view('admin.document.video.data-uploaded-at', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('admin.document.video.form-action', compact('model'))->render();
