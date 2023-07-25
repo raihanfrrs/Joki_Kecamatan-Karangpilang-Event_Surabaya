@@ -4,28 +4,36 @@ $(document).ready(function () {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr("content")
         }
     });
-
-    $.ajax({
-        type: "get",
-        url: "/dashboard/countRequest",
-        success: function(data){
-            $("#countRequest").html(data);
-        }
-    });
     
     $.ajax({
         type: "get",
-        url: "/dashboard/countAccepted",
+        url: "/dashboard/countAcceptedMusbangkel",
         success: function(data){
-            $("#countAccepted").html(data);
+            $("#countAcceptedMusbangkel").html(data);
         }
     });
 
     $.ajax({
         type: "get",
-        url: "/dashboard/countRejected",
+        url: "/dashboard/countAcceptedEvent",
         success: function(data){
-            $("#countRejected").html(data);
+            $("#countAcceptedEevent").html(data);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "/dashboard/countRejectedMusbangkel",
+        success: function(data){
+            $("#countRejectedMusbangkel").html(data);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "/dashboard/countRejectedEvent",
+        success: function(data){
+            $("#countRejectedEvent").html(data);
         }
     });
 });

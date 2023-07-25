@@ -148,7 +148,7 @@ class DocumentController extends Controller
         ->addColumn('action', function ($model) {
             return view('admin.document.photo.form-action', compact('model'))->render();
         })
-        ->rawColumns(['photo', 'action'])
+        ->rawColumns(['event', 'photo', 'action'])
         ->make(true);
     }
 
@@ -286,7 +286,7 @@ class DocumentController extends Controller
         ->addColumn('action', function ($model) {
             return view('admin.document.video.form-action', compact('model'))->render();
         })
-        ->rawColumns(['video', 'action'])
+        ->rawColumns(['event', 'video', 'action'])
         ->make(true);
     }
 }

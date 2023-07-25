@@ -31,7 +31,8 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('dashboard/countEvent', 'countEvent');
     Route::get('dashboard/countMusbangkel', 'countMusbangkel');
 
-    Route::get('dashboard/countRequest', 'countRequest');
-    Route::get('dashboard/countAccepted', 'countAccepted');
-    Route::get('dashboard/countRejected', 'countRejected');
+    Route::get('dashboard/countAcceptedMusbangkel', 'countAcceptedMusbangkel');
+    Route::get('dashboard/countAcceptedEvent', 'countAcceptedEvent');
+    Route::get('dashboard/countRejectedMusbangkel', 'countRejectedMusbangkel');
+    Route::get('dashboard/countRejectedEvent', 'countRejectedEvent');
 });
