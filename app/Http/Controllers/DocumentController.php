@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\PhotoEvent;
 use App\Models\VideoEvent;
+use App\Models\RequestEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class DocumentController extends Controller
 {
@@ -17,42 +20,47 @@ class DocumentController extends Controller
 
     public function photo_create()
     {
-        return view('admin.document.photo.add-photo');
+        return view('admin.document.photo.add-photo', [
+            'events' => RequestEvent::whereNotIn('status', ['tolak'])->get()
+        ]);
     }
 
     public function photo_store(Request $request)
     {
-        $rules = [
-            'name' => 'required|min:2|max:255',
-            'location' => 'required|min:2|max:255',
-            'photo' => 'image|file|max:2048',
-            'description' => 'required|max:2500',
-        ];
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255',
+                'request_event_id' => 'required',
+                'location' => 'required|min:2|max:255',
+                'photo' => 'image|file|max:2048',
+                'description' => 'required|max:2500',
+            ])->validate();
+        
+            if ($request->file('photo')) {
+                $validatedData['photo'] = $request->file('photo')->store('photo-event');
+            }
+            
+            $validatedData['slug'] = slug($request->name);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
 
-        $validateData = $request->validate($rules);
-
-        if ($request->file('photo')) {
-            $validateData['photo'] = $request->file('photo')->store('photo-event');
-        }
-
-        $validateData['slug'] = slug($request->name);
-        $validateData['admin_id'] = auth()->user()->admin[0]->id;
-
-        $photos = PhotoEvent::create($validateData);
-
-        if ($photos) {
-            return redirect('photo/add')->with([
+            PhotoEvent::create($validatedData);
+        
+            return redirect()->intended('/photo/add')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Adding Success!'
+                'message' => 'Add Photo Success!'
             ]);
-        } else {
-            return redirect('photo/add')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Adding Failed!'
+                'message' => 'Add Photo Failed!'
             ]);
         }
     }
@@ -60,46 +68,51 @@ class DocumentController extends Controller
     public function photo_edit(PhotoEvent $photo)
     {
         return view('admin.document.photo.edit-photo')->with([
-            'photo' => $photo
+            'photo' => $photo,
+            'events' => RequestEvent::whereNotIn('status', ['tolak'])->get()
         ]);
     }
 
     public function photo_update(Request $request, PhotoEvent $photo)
     {
-        $rules = [
-            'name' => 'required|min:2|max:255',
-            'location' => 'required|min:2|max:255',
-            'photo' => 'image|file|max:2048',
-            'description' => 'required|max:2500',
-        ];
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255',
+                'request_event_id' => 'required',
+                'location' => 'required|min:2|max:255',
+                'photo' => 'image|file|max:2048',
+                'description' => 'required|max:2500',
+            ])->validate();
+        
+            if ($request->file('photo')) {
+                if ($photo->photo) {
+                    Storage::delete($photo->photo);
+                }
 
-        $validateData = $request->validate($rules);
-
-        if ($request->file('photo')) {
-            if ($photo->photo) {
-                Storage::delete($photo->photo);
+                $validatedData['photo'] = $request->file('photo')->store('photo-event');
             }
-            $validateData['photo'] = $request->file('photo')->store('photo-event');
-        }
+            
+            $validatedData['slug'] = slug($request->name);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
 
-        $validateData['slug'] = slug($request->name);
-        $validateData['admin_id'] = auth()->user()->admin[0]->id;
-
-        $photos = PhotoEvent::whereId($photo->id)->update($validateData);
-
-        if ($photos) {
-            return redirect('photo')->with([
+            PhotoEvent::create($validatedData);
+        
+            return redirect()->intended('/photo')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Update Success!'
+                'message' => 'Update Photo Success!'
             ]);
-        } else {
-            return redirect('photo')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Update Failed!'
+                'message' => 'Update Photo Failed!'
             ]);
         }
     }
@@ -126,6 +139,9 @@ class DocumentController extends Controller
     public function dataPhoto()
     {
         return DataTables::of(PhotoEvent::all())
+        ->addColumn('event', function ($model) {
+            return view('admin.document.photo.data-event', compact('model'))->render();
+        })
         ->addColumn('photo', function ($model) {
             return view('admin.document.photo.data-photo', compact('model'))->render();
         })

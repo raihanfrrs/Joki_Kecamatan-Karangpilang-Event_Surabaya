@@ -11,8 +11,9 @@
                 <table id="dataPhoto" class="table">
                     <thead>
                         <th>ID</th>
-                        <th>Name</th>
                         <th>Photo</th>
+                        <th>Name</th>
+                        <th>Event</th>
                         <th>Location</th>
                         <th>Description</th>
                         <th>Action</th>

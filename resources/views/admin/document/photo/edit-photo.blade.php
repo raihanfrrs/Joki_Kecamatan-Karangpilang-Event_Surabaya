@@ -19,6 +19,22 @@
                 </div>
 
                 <div class="row mb-3">
+                  <label for="request_event_id" class="col-sm-2 col-form-label">Event</label>
+                  <div class="col-sm-10">
+                    <select name="request_event_id" id="request_event_id" class="form-control @error('request_event_id') is-invalid @enderror">
+                      @if ($events->count() > 0)
+                        @foreach ($events as $event)
+                        <option value="{{ $event->id }}" {{ old('request_event_id', $photo->request_event->id) == $event->id ? 'selected' : ''}}>{{ $event->event }}</option>
+                        @endforeach
+                      @else
+                        <option value="" class="text-danger">Don't Have Event Here!</option>
+                      @endif
+                    </select>
+                    @error('request_event_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                  </div>
+                </div>
+
+                <div class="row mb-3">
                   <label for="photo" class="col-sm-2 col-form-label">Photo Upload</label>
                   <div class="col-sm-10">
                     <input class="form-control @error('photo') is-invalid @enderror" type="file" id="photo" name="photo" onchange="previewImage()">
