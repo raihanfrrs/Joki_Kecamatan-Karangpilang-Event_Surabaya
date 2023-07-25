@@ -26,4 +26,14 @@ class VideoEvent extends Model
             ]
         ];
     }
+
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class);
+    }
+
+    public function request_event()
+    {
+        return $this->belongsTo(RequestEvent::class);
+    }
 }

@@ -18,6 +18,16 @@ class Admin extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function photo_event()
+    {
+        return $this->hasMany(PhotoEvent::class);
+    }
+
+    public function video_event()
+    {
+        return $this->hasMany(VideoEvent::class);
+    }
+
     public function request_event()
     {
         return $this->hasMany(RequestEvent::class);

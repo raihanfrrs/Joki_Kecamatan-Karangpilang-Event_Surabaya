@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin;
+use App\Models\RequestEvent;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -17,6 +18,7 @@ class CreateVideoEventsTable extends Migration
         Schema::create('video_events', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Admin::class);
+            $table->foreignIdFor(RequestEvent::class);
             $table->string('name');
             $table->string('slug');
             $table->string('video');

@@ -32,6 +32,16 @@ class RequestEvent extends Model
         return $this->belongsTo(Admin::class);
     }
 
+    public function photo_event()
+    {
+        return $this->hasMany(PhotoEvent::class);
+    }
+
+    public function video_event()
+    {
+        return $this->hasMany(VideoEvent::class);
+    }
+
     public function rukun_warga()
     {
         return $this->belongsTo(RukunWarga::class);
