@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-6 pt-lg-5 wow fadeIn" data-wow-delay="0.5s">
                 <div class="bg-white rounded-top p-5 mt-lg-5">
-                    <p class="fs-5 fw-medium text-primary">TENTANG KAMI</p>
+                    <p class="fs-5 fw-medium text-primary">ABOUT US</p>
                     <h1 class="display-6 mb-4">Yayasan Peduli Anak Bangsa</h1>
                     <div class="row g-5 pt-2 mb-5">
                         <div class="col-sm-6">

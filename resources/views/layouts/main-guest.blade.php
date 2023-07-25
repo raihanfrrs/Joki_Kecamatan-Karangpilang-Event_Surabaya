@@ -46,10 +46,6 @@
 
     @include('partials.guest.carousel')
 
-    @include('partials.guest.feature')
-
-    @include('partials.guest.about')
-
     @yield('section-guest')
 
     @include('partials.guest.footer')
