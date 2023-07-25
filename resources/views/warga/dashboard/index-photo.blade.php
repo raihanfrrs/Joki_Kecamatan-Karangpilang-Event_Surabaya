@@ -14,8 +14,6 @@
                         <div class="project-overlay">
                             <a class="btn btn-lg-square btn-light rounded-circle m-1" href="{{ asset('storage/'. $photo->photo) }}"
                                 data-lightbox="project"><i class="fa fa-eye"></i></a>
-                            <a class="btn btn-lg-square btn-light rounded-circle m-1" href=""><i
-                                    class="fa fa-link"></i></a>
                         </div>
                     </div>
                     <div class="p-4">
