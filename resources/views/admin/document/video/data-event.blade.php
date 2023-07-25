@@ -1,0 +1,1 @@
+{{ $model->request_event->event }}

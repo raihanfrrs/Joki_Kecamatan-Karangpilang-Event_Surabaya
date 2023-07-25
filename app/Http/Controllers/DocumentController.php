@@ -95,7 +95,7 @@ class DocumentController extends Controller
             $validatedData['slug'] = slug($request->name);
             $validatedData['admin_id'] = auth()->user()->admin->id;
 
-            PhotoEvent::create($validatedData);
+            $photo->update($validatedData);
         
             return redirect()->intended('/photo')->with([
                 'flash-type' => 'sweetalert',
@@ -159,42 +159,47 @@ class DocumentController extends Controller
 
     public function video_create()
     {
-        return view('admin.document.video.add-video');
+        return view('admin.document.video.add-video',[
+            'events' => RequestEvent::whereNotIn('status', ['tolak'])->get()
+        ]);
     }
 
     public function video_store(Request $request)
     {
-        $rules = [
-            'name' => 'required|min:2|max:255',
-            'location' => 'required|min:2|max:255',
-            'video' => 'required|mimetypes:video/mp4,video/quicktime|max:50000',
-            'description' => 'required|max:2500',
-        ];
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255',
+                'request_event_id' => 'required',
+                'location' => 'required|min:2|max:255',
+                'video' => 'required|mimetypes:video/mp4,video/quicktime|max:50000',
+                'description' => 'required|max:2500',
+            ])->validate();
+        
+            if ($request->file('video')) {
+                $validatedData['video'] = $request->file('video')->store('video-event');
+            }
+            
+            $validatedData['slug'] = slug($request->name);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
 
-        $validateData = $request->validate($rules);
-
-        if ($request->file('video')) {
-            $validateData['video'] = $request->file('video')->store('video-event');
-        }
-
-        $validateData['slug'] = slug($request->name);
-        $validateData['admin_id'] = auth()->user()->admin[0]->id;
-
-        $videos = VideoEvent::create($validateData);
-
-        if ($videos) {
-            return redirect('video/add')->with([
+            VideoEvent::create($validatedData);
+        
+            return redirect()->intended('/video/add')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Adding Success!'
+                'message' => 'Add Video Success!'
             ]);
-        } else {
-            return redirect('video/add')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Adding Failed!'
+                'message' => 'Add Video Failed!'
             ]);
         }
     }
@@ -202,46 +207,50 @@ class DocumentController extends Controller
     public function video_edit(VideoEvent $video)
     {
         return view('admin.document.video.edit-video')->with([
-            'video' => $video
+            'video' => $video,
+            'events' => RequestEvent::whereNotIn('status', ['tolak'])->get()
         ]);
     }
 
     public function video_update(Request $request, VideoEvent $video)
     {
-        $rules = [
-            'name' => 'required|min:2|max:255',
-            'location' => 'required|min:2|max:255',
-            'video' => 'mimetypes:video/mp4,video/quicktime|max:50000',
-            'description' => 'required|max:2500',
-        ];
-
-        $validateData = $request->validate($rules);
-
-        if ($request->file('video')) {
-            if ($video->video) {
-                Storage::delete($video->video);
+        try {
+            $validatedData = Validator::make($request->all(), [
+                'name' => 'required|min:2|max:255',
+                'request_event_id' => 'required',
+                'location' => 'required|min:2|max:255',
+                'video' => 'mimetypes:video/mp4,video/quicktime|max:50000',
+                'description' => 'required|max:2500',
+            ])->validate();
+        
+            if ($request->file('video')) {
+                if ($video->video) {
+                    Storage::delete($video->video);
+                }
+                $validatedData['video'] = $request->file('video')->store('video-event');
             }
-            $validateData['video'] = $request->file('video')->store('video-event');
-        }
+            
+            $validatedData['slug'] = slug($request->name);
+            $validatedData['admin_id'] = auth()->user()->admin->id;
 
-        $validateData['slug'] = slug($request->name);
-        $validateData['admin_id'] = auth()->user()->admin[0]->id;
-
-        $videos = $video->update($validateData);
-
-        if ($videos) {
-            return redirect('video')->with([
+            $video->update($validatedData);
+        
+            return redirect()->intended('/video')->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'success',
-                'message' => 'Update Success!'
+                'message' => 'Update Video Success!'
             ]);
-        } else {
-            return redirect('video')->with([
+        } catch (ValidationException $e) {
+            return back()->withErrors($e->errors())->withInput();
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'flash-type' => 'sweetalert',
                 'case' => 'default',
                 'position' => 'center',
                 'type' => 'error',
-                'message' => 'Update Failed!'
+                'message' => 'Update Video Failed!'
             ]);
         }
     }
@@ -270,6 +279,9 @@ class DocumentController extends Controller
         return DataTables::of(VideoEvent::all())
         ->addColumn('video', function ($model) {
             return view('admin.document.video.data-video', compact('model'))->render();
+        })
+        ->addColumn('event', function ($model) {
+            return view('admin.document.video.data-event', compact('model'))->render();
         })
         ->addColumn('action', function ($model) {
             return view('admin.document.video.form-action', compact('model'))->render();

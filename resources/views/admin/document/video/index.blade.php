@@ -11,8 +11,9 @@
                     <table id="dataVideo" class="table">
                         <thead>
                             <th>ID</th>
-                            <th>Name</th>
                             <th>Video</th>
+                            <th>Name</th>
+                            <th>Event</th>
                             <th>Location</th>
                             <th>Description</th>
                             <th>Action</th>
